@@ -1,22 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="styles.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus App</title>
-        <script type="module" src="/main.js" defer></script>
-    </head>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON处理器</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>JSON处理器</h1>
+            <div class="theme-toggle">
+                <button id="themeToggle" aria-label="切换主题">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
 
-    <body>
-        <main class="container">
-            <h1>Welcome to PakePlus</h1>
+        <main>
+            <section class="input-section">
+                <h2>JSON输入</h2>
+                <div class="input-methods">
+                    <button id="pasteBtn" class="input-btn active">
+                        <i class="fas fa-paste"></i> 粘贴文本
+                    </button>
+                    <button id="fileBtn" class="input-btn">
+                        <i class="fas fa-file-import"></i> 本地文件
+                    </button>
+                    <button id="urlBtn" class="input-btn">
+                        <i class="fas fa-link"></i> URL导入
+                    </button>
+                </div>
 
-            <form class="row" id="greet-form">
-                <input id="greet-input" placeholder="Enter a name..." />
-                <button type="submit">Greet</button>
-            </form>
-            <p id="greet-msg"></p>
+                <div id="pasteInput" class="input-content active">
+                    <textarea id="jsonInput" placeholder="在此粘贴JSON文本..."></textarea>
+                </div>
+
+                <div id="fileInput" class="input-content">
+                    <input type="file" id="fileUpload" accept=".json">
+                    <label for="fileUpload" class="file-label">
+                        <i class="fas fa-cloud-upload-alt"></i> 选择JSON文件
+                    </label>
+                    <div id="fileName"></div>
+                </div>
+
+                <div id="urlInput" class="input-content">
+                    <input type="url" id="urlImport" placeholder="输入JSON文件的URL...">
+                    <button id="fetchUrlBtn">获取</button>
+                </div>
+
+                <div class="actions">
+                    <button id="formatBtn">
+                        <i class="fas fa-code"></i> 格式化JSON
+                    </button>
+                </div>
+            </section>
+
+            <section class="query-section">
+                <h2>JMESPath查询</h2>
+                <div class="query-input">
+                    <input type="text" id="jmespathQuery" placeholder="输入JMESPath查询表达式...">
+                    <button id="executeQuery">
+                        <i class="fas fa-play"></i> 执行
+                    </button>
+                </div>
+                
+                <div class="examples">
+                    <h3>语法示例</h3>
+                    <ul id="exampleList">
+                        <!-- 示例将通过JavaScript动态添加 -->
+                    </ul>
+                </div>
+                
+                <div class="saved-queries">
+                    <h3>保存的查询</h3>
+                    <div class="query-save">
+                        <input type="text" id="queryAlias" placeholder="给查询取个别名...">
+                        <button id="saveQuery">
+                            <i class="fas fa-save"></i> 保存
+                        </button>
+                    </div>
+                    <ul id="savedQueryList">
+                        <!-- 保存的查询将通过JavaScript动态添加 -->
+                    </ul>
+                </div>
+            </section>
+
+            <section class="result-section">
+                <h2>结果</h2>
+                <div class="result-actions">
+                    <button id="copyResult">
+                        <i class="fas fa-copy"></i> 复制结果
+                    </button>
+                    <button id="exportExcel">
+                        <i class="fas fa-file-export"></i> 导出Excel
+                    </button>
+                </div>
+                <div id="resultContent">
+                    <pre id="resultOutput"></pre>
+                </div>
+            </section>
         </main>
-    </body>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jmespath/0.15.0/jmespath.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
 </html>
